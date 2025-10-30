@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>More-info | AZoom EV</title>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <!--- Header containing logo and navigation links-->
+        <header>
+            <section class="navcontainer">
+                <div class="logo">
+                    <a href="home.html">
+                        <img src="images/logo.png" alt="logo image" height="100px">
+                    </a>
+                </div>
+                <div class="navlinks">
+                <nav>
+                    <a href="home.html">Home</a>
+                    <a href="our-cars.html">Our Cars</a>
+                    <a href="more-info.html">More Info</a>
+                    <a href="reservation.html">Reservations</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Login</a>
+                    <a href="#">Logout</a>
+                </nav>
+                </div>
+            </section>
+        </header>
+
+        <!--- Login Modal -->
+        <div id="loginModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeModal" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Login</h2>
+                <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button class="login-submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+       <!--- Signup Modal -->
+        <div id="signupModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeSignup" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Sign Up</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="signup-password" type="password" required>
+                        <small class="hint">Min 7 chars, 1 uppercase, 1 special symbol</small>
+                        <ul style="margin:8px 0 0;padding-left:18px;">
+                          <li id="signup-len" class="bad">At least 7 characters</li>
+                          <li id="signup-upper" class="bad">At least one uppercase letter (A–Z)</li>
+                          <li id="signup-special" class="bad">At least one special symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                      <button class="login-submit-btn" type="submit">Create account</button>
+                      <div id="signup-result" style="margin-left:8px;font-weight:600" aria-live="polite"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+                <!--- Reservation section containing steps to rent a car -->
+        <section class="reservation">
+            <div class="res-text">
+                <h1>How to rent a car with us</h1>
+                    <p>Renting a car with AZoom Car Rental is a simple and convenient process. Follow these steps to get started:</p>
+                    <ol>
+                        <li>Select your vehicle of choice and reserve it</li>
+                        <li>Collect your vehicle from one of our rental offices</li>
+                        <li>Drive to your heart's content</li>
+                        <li>Return the vehicle to a designated carpark</li>
+                        <li>The vehicle will be inspected to ensure no damage occurred during the rental period</li>
+                        <li>Payment will be processed via credit card</li>
+                    </ol>
+            </div>
+            <div class="res-image">
+                <img src="images/res-steps.webp" alt="res-image">
+            </div>
+        </section>
+
+        <!--- Locations section -->
+        <section class="panel">
+            <div class="panel-text">
+                <h1>Pickup Locations</h1>
+                <p>We currently offer car pickup at our two branches located conveniently in town, easily accessible via public transportation</p>
+            </div>
+            <div class="panel-div">
+                <h2>1. Alexandra</h2>
+                <p>Opening hours: Mon-Sun: 0830-1700 | Closed on Public Holidays
+                <p>Address: 305 Alexandra Rd, Vantage Automotive Centre, Basement 1, Singapore, 159942, Singapore</p>
+                <p>Phone: +65 6789 5432</p>
+                <img src="images/location1.jpg" alt="location1-image">
+                <h2>2. Ubi</h2>
+                <p>Opening hours: Mon-Sun: 0900-1700 | Closed on Public Holidays
+                <p>Address: 10 Ubi Crescent, Lobby B, #01-59, Singapore, 408564, Singapore</p>
+                <p>Phone: +65 5432 6789</p>
+                <img src="images/location2.jpg" alt="location2-image">
+            </div>
+        </section>
+
+        <!--- Drop-off locations section -->
+        <section class="panel">
+            <div class="panel-text">
+                <h1>Drop-off Locations</h1>
+                <p>For your convenience, we have partnered with several carparks around Singapore where you can drop off your rental vehicle. You may return the vehicle to one of the following locations:</p>
+            </div>
+            <div class="panel-div">
+                <h2>1. Suntec City Carpark F</h2>
+                <p>2 Temasek Ave, Singapore 039193</p>
+                <img src="images/dropoff1.jpeg" alt="dropoff1-image">
+                <h2>2. Changi Airport T2 Carpark</h2>
+                <p>Car Park Rd, Singapore 819663</p>
+                <img src="images/dropoff2.jpg" alt="dropoff2-image">
+            </div>
+        </section>
+
+        <!--- Footer with contact info and social media -->
+        <footer>
+            <div class="footer-content-left">
+                <p>Contact us: +65 1234 5678 | AZoomCarRental@gmail.com</p>
+                <p>&copy; 2024 AZoom Car Rental. All rights reserved.</p>
+            </div>
+            <div class="footer-content-right">
+                <p>Follow us on:</p>
+                <a href="#">
+                    <img src="images/instagram.png" alt="instagram" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/tiktok.png" alt="tiktok" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/x.png" alt="x" height="30px">
+                </a>
+            </div>  
+        </footer>
+
+    </body>
+</html>

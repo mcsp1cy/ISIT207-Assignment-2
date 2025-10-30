@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reservations | AZoom EV</title>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="navcontainer">
+                <div class="logo">
+                    <a href="home.html">
+                        <img src="images/logo.png" alt="logo image" height="100px">
+                    </a>
+                </div>
+                <div class="navlinks">
+                <nav>
+                    <a href="home.html">Home</a>
+                    <a href="our-cars.html">Our Cars</a>
+                    <a href="more-info.html">More Info</a>
+                    <a href="reservation.html">Reservations</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Login</a>
+                    <a href="#">Logout</a>
+                </nav>
+                </div>
+            </div>
+        </header>
+
+        <!--- Signup Modal -->
+        <div id="signupModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeSignup" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Sign Up</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="signup-password" type="password" required>
+                        <small class="hint">Min 7 chars, 1 uppercase, 1 special symbol</small>
+                        <ul style="margin:8px 0 0;padding-left:18px;">
+                          <li id="signup-len" class="bad">At least 7 characters</li>
+                          <li id="signup-upper" class="bad">At least one uppercase letter (A–Z)</li>
+                          <li id="signup-special" class="bad">At least one special symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                      <button class="login-submit-btn" type="submit">Create account</button>
+                      <div id="signup-result" style="margin-left:8px;font-weight:600" aria-live="polite"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--- Login Modal -->
+        <div id="loginModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeModal" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Login</h2>
+                <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button class="login-submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!--- Payment section containing payment form -->
+        <section class="payment-section">
+            <div class="payment-header">
+                <h1>Complete Your Reservation</h1>
+                <p>Your EV rental is almost ready! Please review your rental details and enter your payment information to confirm your booking.</p>
+            </div>
+
+            <div class="payment-forms-grid">
+                <!-- Rental Details Card -->
+                <div class="rental-details">
+                    <h2>Rental Details</h2>
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="car-model">Car Model</label>
+                            <select id="car-model" name="car-model" required>
+                                <option value="">Select a vehicle</option>
+                                <option value="tesla-model-3">Tesla Model 3 - $70/day</option>
+                                <option value="tesla-model-y">Tesla Model Y - $50/day</option>
+                                <option value="tesla-model-x">Tesla Model X - $55/day</option>
+                                <option value="byd-atto-3">BYD Atto 3 - $80/day</option>
+                                <option value="byd-seal">BYD SEAL - $85/day</option>
+                                <option value="byd-e6">BYD e6 - $75/day</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickup-location">Pickup Location</label>
+                            <select id="pickup-location" name="pickup-location" required>
+                                <option value="">Select pickup location</option>
+                                <option value="alexandra">Alexandra Center</option>
+                                <option value="ubi">Ubi Avenue</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickup-date">Pickup Date</label>
+                            <input type="date" id="pickup-date" name="pickup-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickup-time">Pickup Time (24H)</label>
+                            <input type="time" id="pickup-time" name="pickup-time" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="drop-date">Drop-off Date</label>
+                            <input type="date" id="drop-date" name="drop-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="drop-time">Drop-off Time (24H)</label>
+                            <input type="time" id="drop-time" name="drop-time" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="drop-off-location">Drop-off Location</label>
+                            <select id="drop-off-location" name="drop-off-location" required>
+                                <option value="">Select drop-off location</option>
+                                <option value="alexandra">Alexandra Center</option>
+                                <option value="changi">Changi Airport T2 Car Park</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Payment info card-->
+                <div class="payment-info">
+                    <h2>Payment Information</h2>
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="cardholder-name">Cardholder Name</label>
+                            <input type="text" id="cardholder-name" name="cardholder-name" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+65 1234 5678" pattern="\d{8,15}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" pattern="\d{16}" required>
+                        </div>
+
+                        <div class="card-details-row">
+                            <div class="form-group">
+                                <label for="expiry-date">Expiry Date</label>
+                                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" pattern="\d{2}/\d{2}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" pattern="\d{3}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="total-cost">Total Estimated Cost:</label>
+                            <input type="text" id="total-cost" name="total-cost" placeholder="-" required>
+                        </div>
+
+                        <button type="submit" class="submit-button">Confirm & Pay Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!--- Footer section -->
+        <footer>
+            <div class="footer-content-left">
+                <p>&copy; 2024 AZoom Car Rental. All rights reserved.</p>
+                <p>Contact us: +65 1234 5678 | AZoomCarRental@gmail.com</p>
+            </div>
+            <div class="footer-content-right">
+                <p>Follow us on:</p>
+                <a href="#">
+                    <img src="images/instagram.png" alt="instagram" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/tiktok.png" alt="tiktok" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/x.png" alt="x" height="30px">
+                </a>
+            </div>  
+        </footer>
+
+    </body>
+</html>

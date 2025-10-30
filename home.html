@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AZoom EV Car Rental</title>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <!--- Header containing logo and navigation links-->
+        <header>
+            <section class="navcontainer">
+                <div class="logo">
+                    <a href="home.html">
+                        <img src="images/logo.png" alt="logo image" height="100px">
+                    </a>
+                </div>
+                <div class="navlinks">
+                <nav>
+                    <a href="home.html">Home</a>
+                    <a href="our-cars.html">Our Cars</a>
+                    <a href="more-info.html">More Info</a>
+                    <a href="reservation.html">Reservations</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Login</a>
+                    <a href="#">Logout</a>
+                </nav>
+                </div>
+            </section>
+        </header>
+
+        <!--- Signup Modal -->
+        <div id="signupModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeSignup" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Sign Up</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="signup-password" type="password" required>
+                        <small class="hint">Min 7 chars, 1 uppercase, 1 special symbol</small>
+                        <ul style="margin:8px 0 0;padding-left:18px;">
+                          <li id="signup-len" class="bad">At least 7 characters</li>
+                          <li id="signup-upper" class="bad">At least one uppercase letter (A–Z)</li>
+                          <li id="signup-special" class="bad">At least one special symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                      <button class="login-submit-btn" type="submit">Create account</button>
+                      <div id="signup-result" style="margin-left:8px;font-weight:600" aria-live="polite"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--- Login Modal -->
+        <div id="loginModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeModal" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Login</h2>
+                <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button class="login-submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!--- Hero section-->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Welcome to AZoom Car Rental</h1>
+                <p>Your premier destination for electric vehicle rentals. Experience the future of driving with our eco-friendly and stylish fleet.</p>
+                <div class="hero-button">
+                    <a href="our-cars.html" class="hero-button">View our cars</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero.jpg" alt="hero-image">
+            </div>
+        </section>
+
+        <!--- About section -->
+        <section class="about">
+            <div class="about-text">
+                <h1>About Us</h1>
+                <p>Specializing exclusively in electric vehicles, AZoom Car Rental empowers customers with an environmentally responsible choice for their transportation needs. We offer a modern, clean, and hassle-free alternative to traditional car rentals.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/about-us.jpg" alt="about-image">
+            </div>
+        </section>
+
+        <!--- Guide section containing button to redirect to reservation html -->
+        <section class="guide">
+            <div class="guide-text">
+                <h1>Why Choose Us?</h1>
+                <p>Our fleet includes a variety of electric cars, from compact models perfect for city driving to spacious MPVs for family trips. Each vehicle is meticulously maintained and equipped with the latest technology to ensure a smooth and enjoyable ride.</p>
+                <a href="more-info.html" class="guide-button">More information:</a>
+            </div>  
+            <div class="guide-image">
+                <img src="images/guide.jpg" alt="guide-image">
+            </div>
+        </section>
+
+        <!--- Footer with contact info and social media -->
+        <footer>
+            <div class="footer-content-left">
+                <p>Contact us: +65 1234 5678 | AZoomCarRental@gmail.com</p>
+                <p>&copy; 2024 AZoom Car Rental. All rights reserved.</p>
+            </div>
+            <div class="footer-content-right">
+                <p>Follow us on:</p>
+                <a href="#">
+                    <img src="images/instagram.png" alt="instagram" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/tiktok.png" alt="tiktok" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/x.png" alt="x" height="30px">
+                </a>
+            </div>  
+        </footer>
+
+    </body>
+</html>

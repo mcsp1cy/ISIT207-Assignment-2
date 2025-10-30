@@ -1,0 +1,854 @@
+/* Home HTML styles */
+/* Global style */
+body {
+    background-color: rgb(250, 250, 250);
+    margin: auto;
+    padding: 0;
+    color: rgb(51, 52, 82);
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Header */
+header {
+    background-color: rgb(16, 42, 67);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px 0 0;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Navigation container */
+.navcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    width: 100%;
+}
+
+/* Logo */
+.logo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+/* Logo hover animation */
+.logo img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Nav links */
+.navlinks nav {
+    display: flex;
+    align-items: center;
+    height: 100px;
+}
+
+.navlinks a {
+    color: rgb(250, 250, 250);
+    font-size: 1.25em;
+    padding: 0 18px;
+    margin: 0 6px;
+    background: none;
+    border: 1px solid transparent;
+    height: 100%;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.navlinks a:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* nav link animation */
+.navlinks a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: rgb(25, 155, 25);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navlinks a:hover::after {
+    width: 80%;
+}
+
+/* Login modal styles */
+.login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.login-form h2 {
+    margin: 0 0 24px;
+    color: rgb(16, 42, 67);
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(16, 42, 67);
+    font-weight: 500;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e3e6ea;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: rgb(25, 155, 25);
+}
+
+.login-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: rgb(25, 155, 25);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-submit-btn:hover {
+    background: rgb(20, 130, 20);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-modal:hover {
+    color: rgb(16, 42, 67);
+}
+
+/* Home Hero section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: auto;           
+    min-height: 750px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;                
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 0;        
+    box-shadow: none;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     
+    object-position: center 25%;   
+    display: block;
+    filter: brightness(0.7); 
+}
+
+/* Hero button */
+.hero-button, .hero-button a {
+    display: inline-block;
+    padding: 10px 16px;
+    background: rgb(25, 155, 25);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    box-shadow: 0 6px 14px rgb(25, 155, 25, 0.12);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.12s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Hero button hover and active states */
+.hero-button:hover, .hero-button a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgb(25, 155, 25, 0.16);
+    opacity: 0.98;
+}
+
+.hero-button:active, .hero-button a:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgb(25, 155, 25, 0.12);
+}
+
+.hero-text {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    color: #fff;
+    padding: 20px;
+    max-width: 1100px;
+}
+
+/* Responsiveness for hero */
+@media (max-width: 720px) {
+    .hero {
+        height: calc(100vh - 80px);
+        min-height: 360px;
+    }
+    .hero-text h1 { font-size: 1.6rem; }
+}
+
+/* About section */
+.about {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    max-width: 85%;
+    margin: 40px auto;
+    gap: 40px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(16,42,67, 0.05);
+    border-radius: 12px;
+    border-left: 6px solid rgb(25, 155, 25);
+}
+
+.about-text {
+    max-width: 55%;
+    text-align: left;
+    margin: left;
+    font-size: 1.5em;
+}
+
+.about-image {
+    margin-left: 100px;
+}
+
+.about-image img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Guide section */
+.guide {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    max-width: 85%;
+    margin: 40px auto;
+    gap: 40px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(16,42,67, 0.05);
+    border-radius: 12px;
+    border-left: 6px solid rgb(25, 155, 25);
+}
+
+.guide-text {
+    max-width: 55%;
+    text-align: left;
+    margin: left;
+    font-size: 1.25em;
+}
+
+.guide-image {
+    margin-left: 100px;
+}
+
+.guide-image img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.guide-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(180deg, rgb(25,155,25) 0%, rgb(18,120,18) 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(25,155,25,0.12);
+    cursor: pointer;
+    text-decoration: none; 
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.guide-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(25,155,25,0.16);
+    opacity: 0.98;
+}
+
+/* Guide animation */
+.about, .guide {
+    transition: all 0.4s ease;
+}
+
+.about:hover, .guide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(16, 42, 67, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: rgb(16, 42, 67);
+    color: rgb(255, 255, 255);
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    background:rgb(16, 42, 67);
+    color: #fff;
+}
+
+.footer-content-left {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.footer-content-right {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.footer-content-right img {
+    background: none;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+
+/* ---------------------------------------- */
+
+/* more-info HTML stlyes */
+/* Res Steps */
+.reservation {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    max-width: 85%;
+    margin: 40px auto;
+    gap: 40px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(16,42,67, 0.05);
+    border-radius: 12px;
+    border-left: 6px solid rgb(25, 155, 25);
+}
+
+.res-text {
+    max-width: 55%;
+    text-align: left;
+    margin: left;
+    font-size: 1.25em;
+}
+
+.res-image {
+    margin-left: 100px;
+}
+
+.res-image img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Locations panel */
+.panel {
+    max-width: 85%;
+    margin: 40px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panel-text {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto 18px;
+    padding: 0 12px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.panel-text h1 {
+    margin: 0 0 10px;
+    font-size: 1.6rem;
+    line-height: 1.15;
+    color: rgb(16, 42, 67);
+}
+
+.panel-text p {
+    margin: 0;
+    color: #556;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panel-div {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 14px rgba(16,42,67,0.04);
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.panel-div h2 { 
+    margin: 12px 0 6px; font-size: 1.1rem; color: rgb(25,155,25); 
+}
+
+.panel-div p { 
+    margin: 4px 0; color: #444; line-height: 1.4; font-size: 0.95rem; 
+}
+
+.panel-div img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: 12px auto 0;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 6px 18px rgba(16,42,67,0.06);
+    object-fit: cover;
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 720px) {
+    .panel { padding: 12px; margin: 20px auto; }
+    .panel-div { padding: 12px; }
+    .panel-text h1, .panel-div h2 { font-size: 1rem; }
+}
+
+/* ---------------------------------------- */
+
+/* Our Cars HTML styles */
+/* Filter panel that follows user scroll */
+.filters {
+    position: sticky;
+    top: 20px; 
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(16,42,67,0.06);
+    border: 1px solid #eee;
+    height: fit-content;
+}
+
+.filters h3 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    color: rgb(51,52,82);
+}
+
+.filter-group {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.filter-group label {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.filter-group select, .filters input[type="text"], .filters input[type="number"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
+    background: #fafafa;
+    font-size: 0.95rem;
+}
+
+/* Filter buttons */
+.filter-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.filter-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.filter-btn.primary {
+    background: linear-gradient(180deg, rgb(25,155,25) 0%, rgb(18,120,18) 100%);
+    color: #fff;
+    border: none;
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 900px) {
+    .cars-layout {
+        grid-template-columns: 1fr; /* single column */
+    }
+    .filters {
+        position: static;
+        top: auto;
+        margin-bottom: 12px;
+    }
+}
+
+/* Cars Container */
+.cars-container {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 24px 40px;
+    box-sizing: border-box;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns of cards */
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+    box-sizing: border-box;
+}
+
+.car-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f6f7f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(16,42,67, 0.05);
+    overflow: hidden; 
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.car-card h2 {
+    margin: 8px 0 4px;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.car-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background:rgb(250, 250, 250);
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Car details reveal on hover */
+.car-details {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    font-size: 0.95rem;
+    color: #555;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 320ms ease, padding 320ms ease;
+    display: block;
+}
+
+/* Hover effect to reveal car details */
+.car-card:hover .car-details {
+    max-height: 240px;
+    padding: 6px 16px 12px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 26px rgba(16, 42, 67, 0.1);
+}
+
+
+/* Layout for cars and filters */
+.cars-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr); /* sidebar + main */
+    gap: 28px;
+    align-items: start;
+}
+
+.reserve-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background: rgb(25, 155, 25);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    box-shadow: 0 6px 14px rgb(25, 155, 25, 0.12);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.12s ease;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+/* ---------------------------------------- */
+
+/* Reservation HTML styles */
+/* Payment Section */
+.payment-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.payment-header h1 {
+    font-size: 2.5rem;
+    color: rgb(16, 42, 67);
+    margin: 0 0 16px;
+    font-weight: 700;
+}
+
+.payment-header p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Forms Grid Layout */
+.payment-forms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Form Cards */
+.rental-details,
+.payment-info {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(16, 42, 67, 0.1);
+    border: 1px solid #eef2f7;
+}
+
+.rental-details h2, .payment-info h2 {
+    margin: 0 0 30px;
+    color: rgb(16, 42, 67);
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 3px solid rgb(25, 155, 25);
+    padding-bottom: 12px;
+}
+
+/* Form Elements */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    color: rgb(16, 42, 67);
+    font-weight: 500;
+}
+
+.form-group input, .form-group select {
+    padding: 14px 16px;
+    border: 2px solid #e3e6ea;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: rgb(25, 155, 25);
+    box-shadow: 0 0 0 3px rgba(25, 155, 25, 0.1);
+}
+
+.form-group input[readonly] {
+    background-color: #f8f9fa;
+    color: #666;
+    font-weight: 600;
+    border-color: #d1d5db;
+}
+
+/* Card Details Row */
+.card-details-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Submit Button */
+.submit-button {
+    margin-top: 24px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgb(25, 155, 25) 0%, rgb(20, 130, 20) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(25, 155, 25, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(25, 155, 25, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .payment-forms-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .payment-section {
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    .payment-header h1 {
+        font-size: 2rem;
+    }
+    .payment-header p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-section {
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+    .rental-details, .payment-info {
+        padding: 24px 20px;
+    }
+    .payment-header h1 {
+        font-size: 1.8rem;
+    }
+    .card-details-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* Responsiveness */
+@media (prefers-reduced-motion: reduce) {
+    .submit-button, .form-group input, .form-group select {
+        transition: none;
+    }
+}

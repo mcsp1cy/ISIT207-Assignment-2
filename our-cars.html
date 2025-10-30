@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Our Fleet | AZoom EV</title>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <!--- Header containing logo and navigation links-->
+        <header>
+            <section class="navcontainer">
+                <div class="logo">
+                    <a href="home.html">
+                        <img src="images/logo.png" alt="logo image" height="100px">
+                    </a>
+                </div>
+                <div class="navlinks">
+                <nav>
+                    <a href="home.html">Home</a>
+                    <a href="our-cars.html">Our Cars</a>
+                    <a href="more-info.html">More Info</a>
+                    <a href="reservation.html">Reservations</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Login</a>
+                    <a href="#">Logout</a>
+                </nav>
+                </div>
+            </section>
+        </header>
+
+        <!--- Signup Modal -->
+        <div id="signupModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeSignup" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Sign Up</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="signup-password" type="password" required>
+                        <small class="hint">Min 7 chars, 1 uppercase, 1 special symbol</small>
+                        <ul style="margin:8px 0 0;padding-left:18px;">
+                          <li id="signup-len" class="bad">At least 7 characters</li>
+                          <li id="signup-upper" class="bad">At least one uppercase letter (A–Z)</li>
+                          <li id="signup-special" class="bad">At least one special symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                      <button class="login-submit-btn" type="submit">Create account</button>
+                      <div id="signup-result" style="margin-left:8px;font-weight:600" aria-live="polite"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--- Login Modal -->
+        <div id="loginModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeModal" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Login</h2>
+                <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button class="login-submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+ 
+        <!--- Cars section showing available vehicles -->
+        <section class="cars-container">
+            <h1>Our Fleet</h1>
+
+            <div class="cars-layout">
+                <aside class="filters" aria-label="Filters">
+                    <h3>Filters</h3>
+
+                    <form>
+                        <div class="filter-group">
+                            <label for="price">Price</label>
+                            <select id="price" name="price">
+                                <option value="">Any</option>
+                                <option value="0-50">$0–$50</option>
+                                <option value="50-70">$50–$70</option>
+                                <option value="70+">$70+</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <span>Seats</span>
+                            <label><input type="checkbox" name="seats" value="4"> 4</label>
+                            <label><input type="checkbox" name="seats" value="5"> 5</label>
+                            <label><input type="checkbox" name="seats" value="7"> 6+</label>
+                        </div>
+
+                        <div class="filter-group">
+                            <span>Range</span>
+                            <label><input type="radio" name="range" value="any" checked> Any</label>
+                            <label><input type="radio" name="range" value="lte-500"> ≤ 500 km</label>
+                            <label><input type="radio" name="range" value="500-600"> 500 - 600 km</label>
+                            <label><input type="radio" name="range" value="gt-600"> &gt; 600 km</label>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button type="reset" class="filter-btn">Reset</button>
+                            <button type="submit" class="filter-btn primary">Apply</button>
+                        </div>
+                    </form>
+                </aside>
+
+            <div class="cars-grid">
+                <div class="car-card" data-price="70" data-seats="5" data-range="750">
+                    <div class="car-image">
+                        <img src="images/tesla-model-3.jpg" alt="Tesla Model 3">
+                    </div>
+                    <h2>Tesla Model 3</h2>
+                        <div class="car-details">
+                            <p>Range: 750km | Seats: 5 | Price: $70/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+                <div class="car-card" data-price="50" data-seats="5" data-range="600">
+                    <div class="car-image">
+                        <img src="images/tesla-model-y.jpg" alt="Tesla Model Y">
+                    </div>
+                    <h2>Tesla Model Y</h2>
+                        <div class="car-details">
+                            <p>Range: 600km | Seats: 5 | Price: $50/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+                <div class="car-card" data-price="80" data-seats="7" data-range="565">
+                    <div class="car-image">
+                        <img src="images/tesla-model-x.webp" alt="Tesla Model X">
+                    </div>
+                    <h2>Tesla Model X</h2>
+                        <div class="car-details">
+                            <p>Range: 565km | Seats: 7 | Price: $80/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+                <div class="car-card" data-price="45" data-seats="4" data-range="490">
+                    <div class="car-image">
+                        <img src="images/byd-atto-3.jpg" alt="BYD Atto 3">
+                    </div>
+                    <h2>BYD Atto 3</h2>
+                        <div class="car-details">
+                            <p>Range: 490km | Seats: 4 | Price: $45/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+                <div class="car-card" data-price="75" data-seats="5" data-range="570">
+                    <div class="car-image">
+                        <img src="images/byd-seal.jpg" alt="BYD SEAL">
+                    </div>
+                    <h2>BYD SEAL</h2>
+                        <div class="car-details">
+                            <p>Range: 570km | Seats: 5 | Price: $75/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+                <div class="car-card" data-price="85" data-seats="7" data-range="520">
+                    <div class="car-image">
+                        <img src="images/byd-e6.jpg" alt="BYD e6">
+                    </div>
+                    <h2>BYD e6</h2>
+                        <div class="car-details">
+                            <p>Range: 520km | Seats: 7 | Price: $85/day</p>
+                            <a href="reservation.html" class="reserve-button">Reserve Now</a>
+                        </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!--- Footer with contact info and social media -->
+        <footer>
+            <div class="footer-content-left">
+                <p>&copy; 2024 AZoom Car Rental. All rights reserved.</p>
+                <p>Contact us: +65 1234 5678 | AZoomCarRental@gmail.com</p>
+            </div>
+            <div class="footer-content-right">
+                <p>Follow us on:</p>
+                <a href="#">
+                    <img src="images/instagram.png" alt="instagram" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/tiktok.png" alt="tiktok" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/x.png" alt="x" height="30px">
+                </a>
+            </div>  
+        </footer>
+
+    </body>
+</html>
