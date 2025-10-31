@@ -432,39 +432,50 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    reservationInput?.addEventListener('input', function () {
-      const reservationId = this.value.trim();
+    // update summary visibility only when reservation exists and return form is valid
+    function updateDropoffSummary() {
+      const reservationId = (reservationInput?.value || '').trim();
       const reservation = mockReservations[reservationId];
 
-      if (reservation) {
-        document.getElementById('summary-name').textContent = reservation.name;
-        document.getElementById('summary-vehicle').textContent = reservation.vehicle;
-        document.getElementById('summary-period').textContent = reservation.period;
-        document.getElementById('summary-initial-cost').textContent = reservation.initialCost;
-        detailsDiv.style.display = 'block';
-        noReservationDiv.style.display = 'none';
-
-        // show additional charges and compute total
-        const add = reservation.additional || 0;
-        const totalNum = (reservation.initialCostNum || 0) + add;
-        const addEl = document.getElementById('summary-additional');
-        const totalEl = document.getElementById('summary-total');
-
-        if (addEl) addEl.textContent = add ? ('$' + add) : '-';
-        if (totalEl) totalEl.textContent = '$' + totalNum;
-
-        const additionalCharges = document.getElementById('additional-charges');
-        if (additionalCharges) additionalCharges.style.display = add ? 'block' : 'none';
-      } else if (reservationId.length > 0) {
-        detailsDiv.style.display = 'none';
-        noReservationDiv.innerHTML = '<p style="color: red;">Reservation not found. Please check your ID.</p>';
-        noReservationDiv.style.display = 'block';
-      } else {
+      if (!reservation) {
         detailsDiv.style.display = 'none';
         noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
         noReservationDiv.style.display = 'block';
+        return;
       }
-    });
+
+      // reservation exists --> require return form to be completely filled/valid
+      if (!returnForm?.checkValidity()) {
+        detailsDiv.style.display = 'none';
+        noReservationDiv.innerHTML = '<p style="color:orange;">Reservation found. Please complete all return information to view the summary.</p>';
+        noReservationDiv.style.display = 'block';
+        return;
+      }
+
+      // reservation exists and return form is valid --> show summary
+      document.getElementById('summary-name').textContent = reservation.name;
+      document.getElementById('summary-vehicle').textContent = reservation.vehicle;
+      document.getElementById('summary-period').textContent = reservation.period;
+      document.getElementById('summary-initial-cost').textContent = reservation.initialCost;
+      detailsDiv.style.display = 'block';
+      noReservationDiv.style.display = 'none';
+
+      const add = reservation.additional || 0;
+      const totalNum = (reservation.initialCostNum || 0) + add;
+      const addEl = document.getElementById('summary-additional');
+      const totalEl = document.getElementById('summary-total');
+      if (addEl) addEl.textContent = add ? ('$' + add) : '-';
+      if (totalEl) totalEl.textContent = '$' + totalNum;
+      const additionalCharges = document.getElementById('additional-charges');
+      if (additionalCharges) additionalCharges.style.display = add ? 'block' : 'none';
+    }
+
+    // run when user types reservation id and whenever any return input changes
+    reservationInput?.addEventListener('input', updateDropoffSummary);
+    returnForm?.addEventListener('input', updateDropoffSummary);
+    returnForm?.addEventListener('change', updateDropoffSummary);
+    // initial check in case fields are pre-filled
+    updateDropoffSummary();
 
     returnForm?.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -475,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      alert('Vehicle returned successfully. Thank you for using AZoom EV Car Rental, we hope to see you again soon!');
+      alert('Vehicle returned successfully, you will be billed shortly. Thank you for using AZoom EV Car Rental, we hope to see you again soon!');
 
       // reset UI
       returnForm.reset();
