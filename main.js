@@ -41,6 +41,51 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  // function to show successful reservation message
+  (function initReservationSubmit() {
+    const reservationForm = document.querySelector('.payment-info form');
+    const rentalForm = document.querySelector('.rental-details form');
+    if (!reservationForm) return;
+
+    reservationForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // ensure rental details are valid before proceeding
+      if (rentalForm && !rentalForm.checkValidity()) {
+        // show browser validation UI for the rental form and focus first invalid field
+        rentalForm.reportValidity();
+        const firstInvalid = rentalForm.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      // validate the payment form
+      if (!reservationForm.checkValidity()) {
+        reservationForm.reportValidity();
+        return;
+      }
+
+      // success message
+      let msg = document.getElementById('reservation-success');
+      if (!msg) {
+        msg = document.createElement('div');
+        msg.id = 'reservation-success';
+        msg.style.color = 'green';
+        msg.style.fontWeight = '600';
+        msg.style.marginTop = '12px';
+        const submitBtn = reservationForm.querySelector('button[type="submit"]');
+        if (submitBtn && submitBtn.parentNode) submitBtn.parentNode.appendChild(msg);
+        else reservationForm.appendChild(msg);
+      }
+      msg.textContent = 'Reservation confirmed! A confirmation email will be sent to you soon.';
+
+      // reset forms and update cost
+      reservationForm.reset();
+      rentalForm?.reset();
+      document.getElementById('pickup-date')?.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  })();
+
   function updatePwChecks() {
     const v = pwInput?.value || '';
     const res = validatePassword(v);

@@ -868,6 +868,15 @@ footer {
     transform: translateY(0);
 }
 
+#reservation-success {
+  background: #e6f9ec;
+  border: 1px solid #bfeacb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #0a6f2b;
+  margin-top: 8px;
+}
+
 /* Responsive Design */
 @media (max-width: 968px) {
     .payment-forms-grid {
