@@ -786,6 +786,63 @@ footer {
     gap: 16px;
 }
 
+/* Small question-mark hint with tooltip for cost */
+.cost-hint {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #102a43;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 8px;
+    position: relative;
+    cursor: help;
+    vertical-align: middle;
+}
+
+.cost-hint:focus { 
+    outline: 2px solid rgba(25,155,25,0.25); outline-offset: 2px; }
+
+/* Tooltip */
+.cost-hint .tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    bottom: calc(100% + 10px);
+    background: rgba(16,42,67,0.95);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .12s ease, transform .12s ease;
+    z-index: 1200;
+}
+
+/* Show on hover or keyboard focus */
+.cost-hint:hover .tooltip, .cost-hint:focus .tooltip, .cost-hint:focus-within .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* Small arrow */
+.cost-hint .tooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+    border: 6px solid transparent;
+    border-top-color: rgba(16,42,67,0.95);
+}
+
 /* Submit Button */
 .submit-button {
     margin-top: 24px;
@@ -827,6 +884,12 @@ footer {
     .payment-header p {
         font-size: 1.1rem;
     }
+    .cost-hint .tooltip {
+        left: 50%;
+        bottom: auto;
+        top: calc(100% + 10px);
+        transform: translateX(-50%) translateY(8px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -851,4 +914,112 @@ footer {
     .submit-button, .form-group input, .form-group select {
         transition: none;
     }
+}
+
+/* ---------------------------------------- */
+
+/* Dropoff HTML styles */
+/* Dropoff Section */
+.dropoff-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.dropoff-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.dropoff-header h1 {
+    font-size: 2rem;
+    color: rgb(16, 42, 67);
+    margin: 0 0 8px;
+    font-weight: 700;
+}
+
+.dropoff-header p {
+    margin: 0;
+    color: #666;
+    font-size: 1rem;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* two-column layout: return details (left) + summary (right) */
+.dropoff-forms-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px; /* flexible left, fixed summary column */
+    gap: 28px;
+    align-items: start;
+}
+
+/* cards */
+.return-details, .return-summary {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(16, 42, 67, 0.08);
+    border: 1px solid #eef2f7;
+    box-sizing: border-box;
+}
+
+/* headings */
+.return-details h2, .return-summary h2 {
+    margin: 0 0 18px;
+    color: rgb(16, 42, 67);
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 3px solid rgb(25, 155, 25);
+    padding-bottom: 10px;
+}
+
+/* form layout (reuse existing .form-group rules) */
+.return-details .form-group { margin-bottom: 18px; }
+
+/* summary layout */
+.return-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eef2f7;
+}
+
+.return-summary .summary-item:last-child { border-bottom: none; }
+
+.return-summary .no-data {
+    text-align: center;
+    color: #666;
+    padding: 12px 0;
+}
+
+/* final amount emphasis */
+.return-summary .total-cost {
+    background: #f8fafb;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* small screens: stack */
+@media (max-width: 968px) {
+    .dropoff-forms-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .dropoff-section { padding: 0 18px; margin: 24px auto; }
+    .return-details, .return-summary { padding: 20px; }
+}
+
+/* keep visual parity with other panels */
+@media (prefers-reduced-motion: reduce) {
+    .dropoff-forms-grid { transition: none; }
 }

@@ -22,6 +22,7 @@
                     <a href="our-cars.html">Our Cars</a>
                     <a href="more-info.html">More Info</a>
                     <a href="reservation.html">Reservations</a>
+                    <a href="dropoff.html">Drop-off</a>
                     <a href="#">Signup</a>
                     <a href="#">Login</a>
                     <a href="#">Logout</a>
@@ -178,9 +179,16 @@
                             </div>
                         </div>
 
+                        <!--- Estimated cost with hover effect-->
                         <div class="form-group">
-                            <label for="total-cost">Total Estimated Cost:</label>
-                            <input type="text" id="total-cost" name="total-cost" placeholder="-" required>
+                            <label for="total-cost">
+                                Estimated Cost:
+                                <span class="cost-hint" tabindex="0" aria-describedby="cost-tip" role="button" aria-label="Cost info">
+                                    ?
+                                    <span class="tooltip" role="tooltip" id="cost-tip">Cost of rental excluding any damages or unforeseen circumstances</span>
+                                </span>
+                            </label>
+                            <input type="text" id="estimated-cost" name="estimated-cost" placeholder="-" required>
                         </div>
 
                         <button type="submit" class="submit-button">Confirm & Pay Now</button>
