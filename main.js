@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
-    }
+}
 
   // sign up modal
   pwInput?.addEventListener('input', updatePwChecks);
@@ -272,9 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pickupDate = document.getElementById('pickup-date');
     const dropDate = document.getElementById('drop-date');
     const carSelect = document.getElementById('car-model');
-    const totalCostEl = document.getElementById('total-cost');
+    const EstCostEl = document.getElementById('estimated-cost');
 
-    if (!pickupDate || !dropDate || !carSelect || !totalCostEl) return;
+    if (!pickupDate || !dropDate || !carSelect || !EstCostEl) return;
 
     // calculate days between dates (inclusive of first day and last day)
     function daysBetweenInclusive(pick, drop) {
@@ -289,13 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return Math.max(1, diffDays + 1);
     }
 
-    // update total cost based on selected car and dates
-    function updateTotalCost() {
+    // update estimated cost based on selected car and dates
+    function updateEstCost() {
       const carKey = carSelect.value;
       const rate = rates[carKey] || 0;
       const days = daysBetweenInclusive(pickupDate.value, dropDate.value);
       const total = rate * days;
-      totalCostEl.value = `$${total}`;
+      EstCostEl.value = `$${total}`;
     }
 
     // ensure dropDate cannot be earlier than pickupDate and update min
@@ -309,12 +309,12 @@ document.addEventListener('DOMContentLoaded', () => {
           dropDate.value = next.toISOString().slice(0,10);
         }
       }
-      updateTotalCost();
+      updateEstCost();
     });
 
     // event listener for cost calculation
-    dropDate.addEventListener('change', updateTotalCost);
-    carSelect.addEventListener('change', updateTotalCost);
+    dropDate.addEventListener('change', updateEstCost);
+    carSelect.addEventListener('change', updateEstCost);
 
     // initialize defaults and compute initial cost 
     if (!pickupDate.value) {
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropDate.value = fallback.toISOString().slice(0,10);
     }
     if (pickupDate.value) dropDate.min = pickupDate.value;
-    updateTotalCost(); // initial cost calculation
+    updateEstCost(); // initial cost calculation
   })();
 
   // reset reservation forms on page load
@@ -354,8 +354,82 @@ document.addEventListener('DOMContentLoaded', () => {
   if (car)    { car.autocomplete = 'off'; car.selectedIndex = 0; }
 
   // notify listeners (updates totals etc.)
-  [pickup, drop, car].forEach(el => { if (el) el.dispatchEvent(new Event('change', { bubbles: true })); });
-})();
+  [pickup, drop, car].forEach(el => { if (el) el.dispatchEvent(new Event('change', { bubbles: true })); 
+  });
+    })();
+
+  // drop-off summary 
+  (function initDropoff() {
+    const returnForm = document.getElementById('returnForm');
+    const reservationInput = document.getElementById('reservation-id');
+    const detailsDiv = document.getElementById('reservation-details');
+    const noReservationDiv = document.getElementById('no-reservation');
+
+    if (!reservationInput && !returnForm) return;
+
+    // hardcoded reservation data
+    const mockReservations = {
+        'AZ20250001': {
+        name: 'John Tan',
+        vehicle: 'Tesla Model 3',
+        period: '15 Oct 2025 - 18 Oct 2025',
+        initialCost: '$210',
+        days: 4
+        },
+        'AZ20250002': {
+        name: 'Sarah Lim',
+        vehicle: 'BYD Atto 3',
+        period: '31 Oct 2025 - 5 Nov 2025',
+        initialCost: '$270',
+        days: 6
+        }
+    };
+
+    reservationInput?.addEventListener('input', function () {
+        const reservationId = this.value.trim();
+        const reservation = mockReservations[reservationId];
+
+        if (reservation) {
+            document.getElementById('summary-name').textContent = reservation.name;
+            document.getElementById('summary-vehicle').textContent = reservation.vehicle;
+            document.getElementById('summary-period').textContent = reservation.period;
+            document.getElementById('summary-initial-cost').textContent = reservation.initialCost;
+            detailsDiv.style.display = 'block';
+            noReservationDiv.style.display = 'none';
+            // reset additional charges / total if present
+            document.getElementById('summary-additional').textContent = '-';
+            document.getElementById('summary-total').textContent = reservation.initialCost;
+            document.getElementById('additional-charges').style.display = 'none';
+        } else if (reservationId.length > 0) {
+            detailsDiv.style.display = 'none';
+            noReservationDiv.style.display = '<p style="color: red;">Reservation not found. Please check your ID.</p>';
+        } else {
+            detailsDiv.style.display = 'none';
+            noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
+            noReservationDiv.style.display = 'block';
+        }
+    });
+
+    returnForm?.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const reservationId = (document.getElementById('reservation-id')?.value || '').trim();
+        const batteryLevel = document.getElementById('fuel-level')?.value || '';
+        const damageNotes = document.getElementById('damage-notes')?.value || '';
+
+        if (!mockReservations[reservationId]) {
+            alert('Please enter a valid reservation ID');
+            return;
+        }
+
+        alert('Return submitted successfully! Our staff will inspect the vehicle and contact you if there are any additional charges.');
+
+        // reset UI
+        returnForm.reset();
+        detailsDiv.style.display = 'none';
+        noReservationDiv.style.display = 'block';
+        noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
+    });
+    })();
 
   // initialise functions when page loads
   updatePwChecks();

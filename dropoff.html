@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AZoom EV Car Rental</title>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <!--- Header containing logo and navigation links-->
+        <header>
+            <section class="navcontainer">
+                <div class="logo">
+                    <a href="home.html">
+                        <img src="images/logo.png" alt="logo image" height="100px">
+                    </a>
+                </div>
+                <div class="navlinks">
+                <nav>
+                    <a href="home.html">Home</a>
+                    <a href="our-cars.html">Our Cars</a>
+                    <a href="more-info.html">More Info</a>
+                    <a href="reservation.html">Reservations</a>
+                    <a href="dropoff.html">Drop-off</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Login</a>
+                    <a href="#">Logout</a>
+                </nav>
+                </div>
+            </section>
+        </header>
+
+        <!--- Signup Modal -->
+        <div id="signupModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeSignup" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Sign Up</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="signup-email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="signup-password" type="password" required>
+                        <small class="hint">Min 7 chars, 1 uppercase, 1 special symbol</small>
+                        <ul style="margin:8px 0 0;padding-left:18px;">
+                          <li id="signup-len" class="bad">At least 7 characters</li>
+                          <li id="signup-upper" class="bad">At least one uppercase letter (A–Z)</li>
+                          <li id="signup-special" class="bad">At least one special symbol (!@#$...)</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                      <button class="login-submit-btn" type="submit">Create account</button>
+                      <div id="signup-result" style="margin-left:8px;font-weight:600" aria-live="polite"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--- Login Modal -->
+        <div id="loginModal" class="login-modal" style="display:none">
+            <div class="login-form">
+                <button id="closeModal" class="close-modal" aria-label="Close">&times;</button>
+                <h2>Login</h2>
+                <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <button class="login-submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!--- Drop-off section -->
+        <section class="dropoff-section">
+            <div class="dropoff-header">
+                <h1>Vehicle Return</h1>
+                <p>Welcome to the AZoom drop-off process. Please have your reservation details ready.</p>
+            </div>
+
+            <div class="dropoff-forms-grid">
+                <!-- Return Details Card -->
+                <div class="return-details">
+                    <h2>Return Information</h2>
+                    <form id="returnForm">
+                        <div class="form-group">
+                            <label for="reservation-id">Reservation ID</label>
+                            <input type="text" id="reservation-id" name="reservation-id" placeholder="eg. AZ20250001" required>
+                            <small class="hint">You can find this in your booking confirmation email (AZ20250001)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dropoff-location">Drop-off Location</label>
+                            <select id="dropoff-location" name="dropoff-location" required>
+                                <option value="">Select drop-off location</option>
+                                <option value="alexandra">Alexandra Center</option>
+                                <option value="changi">Changi Airport T2 Car Park</option>
+                                <option value="ubi">Ubi Avenue</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="current-mileage">Current Vehicle Mileage (km)</label>
+                            <input type="number" id="current-mileage" name="current-mileage" placeholder="Enter current odometer reading" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fuel-level">Battery Level</label>
+                            <select id="fuel-level" name="fuel-level" required>
+                                <option value="">Select current battery level</option>
+                                <option value="full">80-100%</option>
+                                <option value="three-quarter">60-79%</option>
+                                <option value="half">40-59%</option>
+                                <option value="quarter">20-39%</option>
+                                <option value="low">0-19%</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Any Issues to Report?</label>
+                            <textarea id="damage-notes" name="damage-notes" placeholder="Please describe any damages, issues, or concerns with the vehicle..." rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button">Submit Return</button>
+                    </form>
+                </div>
+
+                <!-- Return Summary Card -->
+                <div class="return-summary">
+                    <h2>Return Summary</h2>
+                    <div id="reservation-details" style="display: none;">
+                        <div class="summary-item">
+                            <strong>Customer Name:</strong> <span id="summary-name">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Vehicle:</strong> <span id="summary-vehicle">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Rental Period:</strong> <span id="summary-period">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Initial Cost:</strong> <span id="summary-initial-cost">-</span>
+                        </div>
+                        <div class="summary-item" id="additional-charges" style="display: none;">
+                            <strong>Additional Charges:</strong> <span id="summary-additional">-</span>
+                        </div>
+                        <div class="summary-item total-cost">
+                            <strong>Final Amount:</strong> <span id="summary-total">-</span>
+                        </div>
+                    </div>
+                    <div id="no-reservation" class="no-data">
+                        <p>Enter your reservation ID to view rental details</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--- Footer with contact info and social media -->
+        <footer>
+            <div class="footer-content-left">
+                <p>Contact us: +65 1234 5678 | AZoomCarRental@gmail.com</p>
+                <p>&copy; 2024 AZoom Car Rental. All rights reserved.</p>
+            </div>
+            <div class="footer-content-right">
+                <p>Follow us on:</p>
+                <a href="#">
+                    <img src="images/instagram.png" alt="instagram" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/tiktok.png" alt="tiktok" height="30px">
+                </a>
+                <a href="#">
+                    <img src="images/x.png" alt="x" height="30px">
+                </a>
+            </div>  
+        </footer>
+
+    </body>
+</html>
