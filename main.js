@@ -303,10 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (pickupDate.value) {
         dropDate.min = pickupDate.value;
         if (dropDate.value && new Date(dropDate.value) < new Date(pickupDate.value)) {
-          // set drop to same day as pickup (will count as 1 day)
-          const next = new Date(pickupDate.value);
-          next.setDate(next.getDate()); // keep same day
-          dropDate.value = next.toISOString().slice(0,10);
+          // set drop to same day as pickup (keeps one inclusive rental day)
+          dropDate.value = pickupDate.value;
         }
       }
       updateEstCost();
@@ -330,33 +328,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // reset reservation forms on page load
   (function resetReservationForms() {
-  const rentalForm = document.querySelector('.rental-details form');
-  const paymentForm = document.querySelector('.payment-info form');
-  if (!rentalForm && !paymentForm) return;
+    const rentalForm = document.querySelector('.rental-details form');
+    const paymentForm = document.querySelector('.payment-info form');
+    if (!rentalForm && !paymentForm) return;
 
-  // disable autocomplete + native reset
-  [rentalForm, paymentForm].forEach(f => {
-    if (!f) return;
-    f.autocomplete = 'off';
-    f.reset();
-  });
+    // disable autocomplete + native reset
+    [rentalForm, paymentForm].forEach(f => {
+      if (!f) return;
+      f.autocomplete = 'off';
+      f.reset();
+    });
 
-  const pickup = document.getElementById('pickup-date');
-  const drop = document.getElementById('drop-date');
-  const car = document.getElementById('car-model');
+    const pickup = document.getElementById('pickup-date');
+    const drop = document.getElementById('drop-date');
+    const car = document.getElementById('car-model');
 
-  const today = new Date();
-  const todayISO = today.toISOString().slice(0,10);
-  const tomorrowISO = new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0,10);
+    const today = new Date();
+    const todayISO = today.toISOString().slice(0,10);
+    const tomorrowISO = new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0,10);
 
-  if (pickup) { pickup.autocomplete = 'off'; pickup.value = todayISO; }
-  if (drop)   { drop.autocomplete = 'off'; drop.value = tomorrowISO; drop.min = pickup?.value || todayISO; }
-  if (car)    { car.autocomplete = 'off'; car.selectedIndex = 0; }
+    if (pickup) { pickup.value = todayISO; }
+    if (drop)   { drop.value = tomorrowISO; drop.min = pickup?.value || todayISO; }
+    if (car)    { car.selectedIndex = 0; }
 
-  // notify listeners (updates totals etc.)
-  [pickup, drop, car].forEach(el => { if (el) el.dispatchEvent(new Event('change', { bubbles: true })); 
-  });
-    })();
+    // notify listeners (updates totals etc.)
+    [pickup, drop, car].forEach(el => { if (el) el.dispatchEvent(new Event('change', { bubbles: true })); 
+    });
+  })();
 
   // drop-off summary 
   (function initDropoff() {
@@ -367,69 +365,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!reservationInput && !returnForm) return;
 
-    // hardcoded reservation data
+    // hardcoded reservation data (include numeric cost in initialCostNum and additional fee)
     const mockReservations = {
-        'AZ20250001': {
+      'AZ20250001': {
         name: 'John Tan',
         vehicle: 'Tesla Model 3',
         period: '15 Oct 2025 - 18 Oct 2025',
         initialCost: '$210',
-        days: 4
-        },
-        'AZ20250002': {
+        initialCostNum: 210,
+        days: 4,
+        additional: 0
+      },
+      'AZ20250002': {
         name: 'Sarah Lim',
         vehicle: 'BYD Atto 3',
         period: '31 Oct 2025 - 5 Nov 2025',
         initialCost: '$270',
-        days: 6
-        }
+        initialCostNum: 270,
+        days: 6,
+        additional: 50 // minor damage fee
+      }
     };
 
     reservationInput?.addEventListener('input', function () {
-        const reservationId = this.value.trim();
-        const reservation = mockReservations[reservationId];
+      const reservationId = this.value.trim();
+      const reservation = mockReservations[reservationId];
 
-        if (reservation) {
-            document.getElementById('summary-name').textContent = reservation.name;
-            document.getElementById('summary-vehicle').textContent = reservation.vehicle;
-            document.getElementById('summary-period').textContent = reservation.period;
-            document.getElementById('summary-initial-cost').textContent = reservation.initialCost;
-            detailsDiv.style.display = 'block';
-            noReservationDiv.style.display = 'none';
-            // reset additional charges / total if present
-            document.getElementById('summary-additional').textContent = '-';
-            document.getElementById('summary-total').textContent = reservation.initialCost;
-            document.getElementById('additional-charges').style.display = 'none';
-        } else if (reservationId.length > 0) {
-            detailsDiv.style.display = 'none';
-            noReservationDiv.style.display = '<p style="color: red;">Reservation not found. Please check your ID.</p>';
-        } else {
-            detailsDiv.style.display = 'none';
-            noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
-            noReservationDiv.style.display = 'block';
-        }
+      if (reservation) {
+        document.getElementById('summary-name').textContent = reservation.name;
+        document.getElementById('summary-vehicle').textContent = reservation.vehicle;
+        document.getElementById('summary-period').textContent = reservation.period;
+        document.getElementById('summary-initial-cost').textContent = reservation.initialCost;
+        detailsDiv.style.display = 'block';
+        noReservationDiv.style.display = 'none';
+
+        // show additional charges and compute total
+        const add = reservation.additional || 0;
+        const totalNum = (reservation.initialCostNum || 0) + add;
+        const addEl = document.getElementById('summary-additional');
+        const totalEl = document.getElementById('summary-total');
+
+        if (addEl) addEl.textContent = add ? ('$' + add) : '-';
+        if (totalEl) totalEl.textContent = '$' + totalNum;
+
+        const additionalCharges = document.getElementById('additional-charges');
+        if (additionalCharges) additionalCharges.style.display = add ? 'block' : 'none';
+      } else if (reservationId.length > 0) {
+        detailsDiv.style.display = 'none';
+        noReservationDiv.innerHTML = '<p style="color: red;">Reservation not found. Please check your ID.</p>';
+        noReservationDiv.style.display = 'block';
+      } else {
+        detailsDiv.style.display = 'none';
+        noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
+        noReservationDiv.style.display = 'block';
+      }
     });
 
     returnForm?.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const reservationId = (document.getElementById('reservation-id')?.value || '').trim();
-        const batteryLevel = document.getElementById('fuel-level')?.value || '';
-        const damageNotes = document.getElementById('damage-notes')?.value || '';
+      e.preventDefault();
+      const reservationId = (document.getElementById('reservation-id')?.value || '').trim();
 
-        if (!mockReservations[reservationId]) {
-            alert('Please enter a valid reservation ID');
-            return;
-        }
+      if (!mockReservations[reservationId]) {
+        alert('Please enter a valid reservation ID');
+        return;
+      }
 
-        alert('Return submitted successfully! Our staff will inspect the vehicle and contact you if there are any additional charges.');
+      alert('Vehicle returned successfully. Thank you for using AZoom EV Car Rental, we hope to see you again soon!');
 
-        // reset UI
-        returnForm.reset();
-        detailsDiv.style.display = 'none';
-        noReservationDiv.style.display = 'block';
-        noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
+      // reset UI
+      returnForm.reset();
+      detailsDiv.style.display = 'none';
+      noReservationDiv.style.display = 'block';
+      noReservationDiv.innerHTML = '<p>Enter your reservation ID to view rental details</p>';
     });
-    })();
+  })();
 
   // initialise functions when page loads
   updatePwChecks();
