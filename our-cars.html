@@ -83,11 +83,13 @@
         <section class="cars-container">
             <h1>Our Fleet</h1>
 
+            <!--- Filters group -->
             <div class="cars-layout">
                 <aside class="filters" aria-label="Filters">
                     <h3>Filters</h3>
 
                     <form>
+                        <!-- Price filter -->
                         <div class="filter-group">
                             <label for="price">Price</label>
                             <select id="price" name="price">
@@ -98,6 +100,7 @@
                             </select>
                         </div>
 
+                        <!-- Seats filter -->
                         <div class="filter-group">
                             <span>Seats</span>
                             <label><input type="checkbox" name="seats" value="4"> 4</label>
@@ -105,6 +108,7 @@
                             <label><input type="checkbox" name="seats" value="7"> 6+</label>
                         </div>
 
+                        <!-- Range filter -->
                         <div class="filter-group">
                             <span>Range</span>
                             <label><input type="radio" name="range" value="any" checked> Any</label>
@@ -113,13 +117,14 @@
                             <label><input type="radio" name="range" value="gt-600"> &gt; 600 km</label>
                         </div>
 
+                        <!-- Reset button -->
                         <div class="filter-actions">
                             <button type="reset" class="filter-btn">Reset</button>
-                            <button type="submit" class="filter-btn primary">Apply</button>
                         </div>
                     </form>
                 </aside>
 
+            <!-- Cars grid -->
             <div class="cars-grid">
                 <div class="car-card" data-price="70" data-seats="5" data-range="750">
                     <div class="car-image">
